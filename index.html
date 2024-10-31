@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aventura Romântica</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f0f8;
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 24px;
+        }
+        .question {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Escolha sua Aventura Romântica</h1>
+        <div class="question" id="question">Vamos planejar um dia perfeito! Para começar, escolha um local:</div>
+        <div class="buttons" id="buttons">
+            <button onclick="chooseOption('praia')">Praia</button>
+            <button onclick="chooseOption('montanha')">Montanha</button>
+        </div>
+    </div>
+
+    <!-- Formulário oculto para envio -->
+    <form id="form" action="https://formspree.io/f/{seu_form_id}" method="POST" style="display:none;">
+        <input type="hidden" name="Respostas" id="responses">
+    </form>
+
+    <script>
+        // Variável para armazenar as respostas do usuário
+        const responses = [];
+
+        // Função para armazenar a escolha e passar para a próxima pergunta
+        function chooseOption(choice) {
+            responses.push(choice); // Armazena a resposta escolhida
+            nextQuestion(choice);
+        }
+
+        // Função para exibir a próxima pergunta com base na escolha
+        function nextQuestion(choice) {
+            const questionElement = document.getElementById("question");
+            const buttonsElement = document.getElementById("buttons");
+
+            // Lógica para as próximas perguntas com base na escolha inicial
+            if (responses.length === 1) {
+                if (choice === "praia") {
+                    questionElement.textContent = "Legal! Agora, o que vamos fazer lá?";
+                    buttonsElement.innerHTML = `
+                        <button onclick="chooseOption('mergulhar')">Mergulhar</button>
+                        <button onclick="chooseOption('andar de barco')">Andar de Barco</button>
+                    `;
+                } else {
+                    questionElement.textContent = "Perfeito! O que você prefere fazer na montanha?";
+                    buttonsElement.innerHTML = `
+                        <button onclick="chooseOption('passear')">Passear</button>
+                        <button onclick="chooseOption('acampar')">Acampar</button>
+                    `;
+                }
+            } else if (responses.length === 2) {
+                questionElement.textContent = "Última pergunta! Qual comida vai deixar o dia completo?";
+                buttonsElement.innerHTML = `
+                    <button onclick="chooseOption('frutos do mar')">Frutos do Mar</button>
+                    <button onclick="chooseOption('churrasco')">Churrasco</button>
+                `;
+            } else {
+                questionElement.textContent = "A aventura está completa! Obrigado por planejar esse dia comigo :)";
+                buttonsElement.style.display = 'none';
+                sendResponses();
+            }
+        }
+
+        // Função para enviar as respostas
+        function sendResponses() {
+            document.getElementById("responses").value = responses.join(", ");
+            document.getElementById("form").submit();
+        }
+    </script>
+</body>
+</html>
