@@ -43,10 +43,12 @@
 <body>
     <div class="container">
         <h1>Escolha sua Aventura Romântica</h1>
-        <div class="question" id="question">Vamos planejar um dia perfeito! Para começar, escolha um local:</div>
+        <div class="question" id="question">Vamos planejar um encontro perfeito! Para começar, onde você gostaria de ir?</div>
         <div class="buttons" id="buttons">
             <button onclick="chooseOption('praia')">Praia</button>
             <button onclick="chooseOption('montanha')">Montanha</button>
+            <button onclick="chooseOption('restaurante')">Restaurante</button>
+            <button onclick="chooseOption('cinema')">Cinema</button>
         </div>
     </div>
 
@@ -72,24 +74,44 @@
 
             // Lógica para as próximas perguntas com base na escolha inicial
             if (responses.length === 1) {
-                if (choice === "praia") {
-                    questionElement.textContent = "Legal! Agora, o que vamos fazer lá?";
-                    buttonsElement.innerHTML = `
-                        <button onclick="chooseOption('mergulhar')">Mergulhar</button>
-                        <button onclick="chooseOption('andar de barco')">Andar de Barco</button>
-                    `;
-                } else {
-                    questionElement.textContent = "Perfeito! O que você prefere fazer na montanha?";
-                    buttonsElement.innerHTML = `
-                        <button onclick="chooseOption('passear')">Passear</button>
-                        <button onclick="chooseOption('acampar')">Acampar</button>
-                    `;
-                }
-            } else if (responses.length === 2) {
-                questionElement.textContent = "Última pergunta! Qual comida vai deixar o dia completo?";
+                questionElement.textContent = "Ótima escolha! Qual atividade você gostaria de fazer?";
                 buttonsElement.innerHTML = `
-                    <button onclick="chooseOption('frutos do mar')">Frutos do Mar</button>
-                    <button onclick="chooseOption('churrasco')">Churrasco</button>
+                    <button onclick="chooseOption('mergulhar')">Mergulhar</button>
+                    <button onclick="chooseOption('andar de barco')">Andar de Barco</button>
+                    <button onclick="chooseOption('jantar à luz de velas')">Jantar à Luz de Velas</button>
+                    <button onclick="chooseOption('assistir a um filme')">Assistir a um Filme</button>
+                `;
+            } else if (responses.length === 2) {
+                questionElement.textContent = "Qual é o tipo de música que vai embalar nosso encontro?";
+                buttonsElement.innerHTML = `
+                    <button onclick="chooseOption('romântica')">Romântica</button>
+                    <button onclick="chooseOption('pop')">Pop</button>
+                    <button onclick="chooseOption('rock')">Rock</button>
+                    <button onclick="chooseOption('eletrônica')">Eletrônica</button>
+                `;
+            } else if (responses.length === 3) {
+                questionElement.textContent = "Qual seria a sua bebida favorita para este dia?";
+                buttonsElement.innerHTML = `
+                    <button onclick="chooseOption('vinho')">Vinho</button>
+                    <button onclick="chooseOption('cerveja')">Cerveja</button>
+                    <button onclick="chooseOption('coquetel')">Coquetel</button>
+                    <button onclick="chooseOption('sucos naturais')">Sucos Naturais</button>
+                `;
+            } else if (responses.length === 4) {
+                questionElement.textContent = "Agora, como você gostaria de finalizar a noite?";
+                buttonsElement.innerHTML = `
+                    <button onclick="chooseOption('passeio à noite')">Passeio à Noite</button>
+                    <button onclick="chooseOption('voltar para casa')">Voltar para Casa</button>
+                    <button onclick="chooseOption('parada em um bar')">Parada em um Bar</button>
+                    <button onclick="chooseOption('assistir a um pôr do sol')">Assistir ao Pôr do Sol</button>
+                `;
+            } else if (responses.length === 5) {
+                questionElement.textContent = "Qual é a sua lembrança favorita de nós dois?";
+                buttonsElement.innerHTML = `
+                    <button onclick="chooseOption('nossa viagem')">Nossa Viagem</button>
+                    <button onclick="chooseOption('o dia que nos conhecemos')">O Dia que Nos Conhecemos</button>
+                    <button onclick="chooseOption('o primeiro encontro')">O Primeiro Encontro</button>
+                    <button onclick="chooseOption('um momento engraçado')">Um Momento Engraçado</button>
                 `;
             } else {
                 questionElement.textContent = "A aventura está completa! Obrigado por planejar esse dia comigo :)";
